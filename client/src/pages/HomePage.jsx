@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ProductList from '../components/ProductList'; // Reutilizamos el mismo componente de UI
+import Loader from '../components/Loader';
 
 function HomePage() {
     const [products, setProducts] = useState([]);
@@ -24,7 +25,7 @@ function HomePage() {
             });
     }, []);
 
-    if (loading) return <div>Cargando productos destacados...</div>;
+    if (loading) return <Loader />;
     if (error) return <div>Error: {error}</div>;
 
     // Le pasamos solo los productos destacados al ProductList

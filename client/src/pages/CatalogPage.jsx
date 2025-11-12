@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import ProductList from '../components/ProductList'; // Importa el componente de UI
+import Loader from '../components/Loader';
 
 function CatalogPage() {
     const [products, setProducts] = useState([]);
@@ -24,7 +25,7 @@ function CatalogPage() {
             });
     }, []); // El array vacío asegura que se ejecute solo una vez
 
-    if (loading) return <div>Cargando productos...</div>;
+    if (loading) return <Loader />;
     if (error) return <div>Error: {error}</div>;
 
     // Pasa los productos al componente ProductList que solo se encarga de mostrar

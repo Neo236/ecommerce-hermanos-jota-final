@@ -556,3 +556,28 @@ body {
     background-color: #f2dede; /* Rojo suave */
     color: #a94442;
 }
+
+/* ======================================= */
+/* LOADER (SPINNER)                   */
+/* ======================================= */
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem; /* Le da algo de espacio */
+    min-height: 300px; /* Evita que la página salte */
+}
+
+.loader {
+    border: 6px solid var(--light-grey); /* Círculo base gris claro */
+    border-top: 6px solid var(--siena-tostado); /* Color de la marca */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

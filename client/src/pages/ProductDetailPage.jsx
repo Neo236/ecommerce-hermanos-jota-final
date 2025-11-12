@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductDetail from '../components/ProductDetail'; // Importa el componente de UI
+import Loader from '../components/Loader'
 
 function ProductDetailPage({ onAddToCart }) {
     const [product, setProduct] = useState(null);
@@ -45,7 +46,7 @@ function ProductDetailPage({ onAddToCart }) {
         }
     };
 
-    if (loading) return <div>Cargando producto...</div>;
+    if (loading) return <Loader />;
     if (error) return <div>Error: {error}</div>;
 
     // Necesitamos asegurarnos de que el producto no sea nulo antes de renderizar
