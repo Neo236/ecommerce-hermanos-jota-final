@@ -14,7 +14,7 @@ function ProductDetailPage({ onAddToCart }) {
 
     useEffect(() => {
         // Busca solo el producto específico usando el ID de la URL
-        fetch(`http://localhost:3001/api/productos/${id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/productos/${id}`)
             .then(res => {
                 if (!res.ok) throw new Error('Producto no encontrado');
                 return res.json();
@@ -33,7 +33,7 @@ function ProductDetailPage({ onAddToCart }) {
     const handleDelete = async () => {
         if (window.confirm('¿Estás seguro de que quieres eliminar este producto?')) {
             try {
-                const response = await fetch(`http://localhost:3001/api/productos/${id}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/productos/${id}`, {
                     method: 'DELETE',
                 });
                 if (!response.ok) throw new Error('Error al eliminar');

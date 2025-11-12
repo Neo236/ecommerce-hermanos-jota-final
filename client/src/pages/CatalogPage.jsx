@@ -9,7 +9,7 @@ function CatalogPage() {
 
     useEffect(() => {
         // Esta página es ahora responsable de buscar sus propios datos
-        fetch('http://localhost:3001/api/productos')
+        fetch('${import.meta.env.VITE_API_URL}/api/productos')
             .then(res => {
                 if (!res.ok) throw new Error('Respuesta de la red no fue exitosa');
                 return res.json();
