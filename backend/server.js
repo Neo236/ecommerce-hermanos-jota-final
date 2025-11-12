@@ -11,7 +11,24 @@ const PORT = process.env.PORT || 3001;
 const MONGO_URL = process.env.MONGO_URL; // <-- Usando tu variable MONGO_URL
 
 // --- MIDDLEWARES ---
-app.use(cors());
+const whitelist = [
+    'http://localhost:5173', // Tu frontend de desarrollo
+    'https://ecommerce-hermanos-jota-mern.vercel.app' // Tu frontend de Vercel
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Permitir peticiones si están en la whitelist o si no tienen origen (ej: Postman)
+        if (whitelist.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('No permitido por CORS'));
+        }
+    }
+};
+
+app.use(cors(corsOptions)); // Usa las opciones avanzadas
+
 app.use((req, res, next) => {
     console.log(`Petición recibida: ${req.method} ${req.url}`);
     next();
