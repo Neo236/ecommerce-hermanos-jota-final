@@ -1,15 +1,20 @@
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; // 1. Importar Link
+import { Link } from 'react-router-dom';
 
 function Navbar({ cartItemCount }) {
   const [isNavActive, setIsNavActive] = useState(false);
 
+  // 1. Creamos una función que cierra el menú
+  const handleLinkClick = () => {
+    setIsNavActive(false);
+  };
+
   return (
     <header className="main-header">
       <div className="header-container">
-        {/* 2. El logo ahora es un Link a la página de inicio */}
-        <Link to="/" className="header-logo">
+        {/* Usamos 'handleLinkClick' aquí también para que el logo cierre el menú */}
+        <Link to="/" className="header-logo" onClick={handleLinkClick}>
           <img src="/logo.svg" alt="Logo Hermanos Jota" /> 
           <span>Hermanos Jota</span>
         </Link>
@@ -18,17 +23,17 @@ function Navbar({ cartItemCount }) {
           className="menu-toggle" 
           id="menu-toggle" 
           aria-label="Abrir menú"
-          onClick={() => setIsNavActive(!isNavActive)}
+          onClick={() => setIsNavActive(!isNavActive)} // Esto abre/cierra con el botón
         >
           <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" height="24px" width="24px" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
         </button>
 
         <nav className={`main-nav ${isNavActive ? 'is-active' : ''}`} id="main-nav">
           <ul>
-            {/* 3. Reemplazamos <a> por <Link> y 'href' por 'to' */}
-            <li><Link to="/">Inicio</Link></li>
-            <li><Link to="/productos">Productos</Link></li>
-            <li><Link to="/contacto">Contacto</Link></li>
+            {/* 2. Añadimos 'onClick={handleLinkClick}' a cada enlace del menú */}
+            <li><Link to="/" onClick={handleLinkClick}>Inicio</Link></li>
+            <li><Link to="/productos" onClick={handleLinkClick}>Productos</Link></li>
+            <li><Link to="/contacto" onClick={handleLinkClick}>Contacto</Link></li>
           </ul>
         </nav>
         
