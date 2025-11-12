@@ -278,7 +278,7 @@ body {
 /* --- Hero Section --- */
 .hero-section {
     background-color: var(--alabastro-calido);
-    min-height: 60vh; /* Usamos min-height para mejor flexibilidad */
+    min-height: 50vh; /* Usamos min-height para mejor flexibilidad */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -309,6 +309,8 @@ body {
     font-weight: 500;
     transition: all 0.3s ease;
     display: inline-block; /* Asegura que el padding se aplique bien */
+    border: none;
+    cursor: pointer;
 }
 
 .btn-primary {

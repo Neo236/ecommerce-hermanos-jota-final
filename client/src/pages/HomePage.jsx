@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import Hero from '../components/Hero';
 import ProductList from '../components/ProductList'; // Reutilizamos el mismo componente de UI
 import Loader from '../components/Loader';
 
@@ -16,7 +17,6 @@ function HomePage() {
             })
             .then(data => {
                 setProducts(data.slice(0, 4)); 
-                
                 setLoading(false);
             })
             .catch(err => {
@@ -25,11 +25,15 @@ function HomePage() {
             });
     }, []);
 
-    if (loading) return <Loader />;
-    if (error) return <div>Error: {error}</div>;
+    return (
+        <>
+            {/* 4. Añadimos el Hero Banner en la parte superior */}
+            <Hero />
 
-    // Le pasamos solo los productos destacados al ProductList
-    return <ProductList products={products} />;
+            {/* 5. Mostramos el Loader o los productos debajo */}
+            {loading ? <Loader /> : <ProductList products={products} />}
+        </>
+    );
 }
 
 export default HomePage;
