@@ -10,7 +10,7 @@ function Navbar({ cartItemCount }) {
       <div className="header-container">
         {/* 2. El logo ahora es un Link a la página de inicio */}
         <Link to="/" className="header-logo">
-          <img src="/images/logo.svg" alt="Logo Hermanos Jota" /> 
+          <img src="/logo.svg" alt="Logo Hermanos Jota" /> 
           <span>Hermanos Jota</span>
         </Link>
 
