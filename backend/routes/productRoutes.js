@@ -1,27 +1,90 @@
+
 const express = require('express');
 const router = express.Router();
+const Product = require('../models/Product'); // 1. ¡Importamos el modelo!
 
-const products = require('../data/products.json');
+// 2. Ya no necesitamos importar el JSON
+// const products = require('../data/products.json');
 
-// --- ENDPOINTS ---
+// --- ENDPOINTS CRUD ---
 
-// 1. GET /api/productos
-// Devuelve la lista completa de productos.
-router.get('/', (req, res) => {
-    res.json(products);
+// 1. GET /api/productos (Leer TODOS)
+router.get('/', async (req, res) => {
+    try {
+        const products = await Product.find();
+        res.json(products);
+    } catch (err) {
+        res.status(500).json({ message: "Error al obtener los productos: " + err.message });
+    }
 });
 
-// 2. GET /api/productos/:id
-// Devuelve un producto específico según su ID.
-router.get('/:id', (req, res) => {
-    const productId = parseInt(req.params.id);
+// 2. GET /api/productos/:id (Leer UNO)
+router.get('/:id', async (req, res) => {
+    try {
+        // req.params.id será el _id de MongoDB
+        const product = await Product.findById(req.params.id); 
+        
+        if (product) {
+            res.json(product); // Devuelve el producto encontrado
+        } else {
+            res.status(404).json({ message: 'Producto no encontrado' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: "Error al obtener el producto: " + err.message });
+    }
+});
 
-    const product = products.find(p => p.id === productId);
+// 3. POST /api/productos (Crear UNO)
+router.post('/', async (req, res) => {
+    // Los datos del nuevo producto vienen en el body (req.body)
+    const product = new Product({
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        image: req.body.image,
+        specs: req.body.specs
+    });
 
-    if (product) {
-        res.json(product);
-    } else {
-        res.status(404).json({ message: 'Producto no encontrado' });
+    try {
+        const newProduct = await product.save();
+        res.status(201).json(newProduct); // 201 = Creado exitosamente
+    } catch (err) {
+        // Esto pasará si falta un campo 'required' (ej: 'name')
+        res.status(400).json({ message: "Error al crear el producto: " + err.message });
+    }
+});
+
+// 4. PUT /api/productos/:id (Actualizar UNO)
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(
+            req.params.id, // El ID del producto a actualizar
+            req.body,      // Los datos nuevos que vienen en el body
+            { new: true }  // Esta opción hace que devuelva el documento actualizado
+        );
+        
+        if (updatedProduct) {
+            res.json(updatedProduct);
+        } else {
+            res.status(404).json({ message: 'Producto no encontrado' });
+        }
+    } catch (err) {
+        res.status(400).json({ message: "Error al actualizar el producto: " + err.message });
+    }
+});
+
+// 5. DELETE /api/productos/:id (Borrar UNO)
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+
+        if (deletedProduct) {
+            res.json({ message: 'Producto eliminado exitosamente' });
+        } else {
+            res.status(404).json({ message: 'Producto no encontrado' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: "Error al eliminar el producto: " + err.message });
     }
 });
 
