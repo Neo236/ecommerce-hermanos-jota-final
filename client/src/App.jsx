@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import ContactForm from './components/ContactForm'; // 2. ContactForm ahora es una "página"
 
 // Importamos Páginas
+import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CreateProductPage from './pages/CreateProductPage';
@@ -49,8 +50,8 @@ function App() {
           {/* Ruta para el formulario de creación*/}
           <Route path="/admin/crear-producto" element={<CreateProductPage />} />
 
-          {/* Ruta para la página de inicio (usará el mismo componente que el catálogo por ahora) */}
-          <Route path="/" element={<CatalogPage />} /> 
+          {/* Ruta para la página de inicio*/}
+          <Route path="/" element={<HomePage />} /> 
           
           {/* Ruta para cualquier URL no encontrada (404) */}
           <Route path="*" element={<NotFoundPage />} /> 
