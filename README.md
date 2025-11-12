@@ -9,7 +9,6 @@ Se implementó una API CRUD completa con Express y MongoDB y se refactorizó el 
 * **Frontend (React en Vercel):** `https://ecommerce-hermanos-jota-mern.vercel.app`
 * **Backend (API en Render):** `https://ecommerce-hermanos-jota-api.onrender.com/api/productos`
 
-#
 ---
 
 ## 📋 Funcionalidades Implementadas
@@ -38,7 +37,6 @@ Se implementó una API CRUD completa con Express y MongoDB y se refactorizó el 
 * Componente `Loader` (spinner) para los estados de carga.
 * Menú de navegación móvil que se cierra automáticamente al seleccionar una opción.
 
-#
 ---
 
 ## 🛠️ Cómo ejecutar localmente
