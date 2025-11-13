@@ -22,7 +22,7 @@ const MONGO_URL = process.env.MONGO_URL;
 // --- MIDDLEWARES ---
 const whitelist = [
     'http://localhost:5173', // frontend de desarrollo
-    'https://ecommerce-hermanos-jota-mern.vercel.app' // frontend de Vercel
+    'https://ecommerce-hermanos-jota-final.vercel.app/' // frontend de Vercel
 ];
 
 const corsOptions = {
