@@ -39,16 +39,6 @@ router.get('/:id', async (req, res) => {
 router.post('/', protect, admin, async (req, res) => {
 
     try {
-        // --- INICIO DE LA SOLUCIÓN DE LÍMITE ---
-        const productCount = await Product.countDocuments();
-        
-        // El límite.
-        if (productCount >= 11) {
-            return res.status(403).json({ 
-                message: "Límite de productos alcanzado. No se pueden agregar más." 
-            });
-        }
-        // --- FIN DE LA SOLUCIÓN DE LÍMITE ---
 
         // Los datos del nuevo producto vienen en el body (req.body)
         const product = new Product({

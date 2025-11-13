@@ -813,3 +813,28 @@ input:-webkit-autofill:active {
     margin-bottom: 2rem;
     padding: 2rem; /* Ajusta el padding si es necesario */
 }
+
+/* ======================================= */
+/* MEJORAS NAVBAR (ALINEACIÓN Y HOVER)    */
+/* ======================================= */
+
+/*
+  Alinea verticalmente los items del menú (Inicio, Productos, etc.)
+  con el logo y el carrito en la vista de escritorio.
+*/
+@media (min-width: 768px) {
+    .main-nav ul {
+        align-items: center; /* ¡Alineación vertical! */
+    }
+}
+
+/* Añade un efecto de 'hover' al ícono del carrito
+*/
+.header-cart a {
+    transition: transform 0.2s ease;
+    display: inline-block; /* Necesario para que 'transform' funcione */
+}
+
+.header-cart a:hover {
+    transform: scale(1.15); /* Agranda un poco el ícono */
+}
