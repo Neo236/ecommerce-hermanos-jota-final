@@ -9,7 +9,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js'; // 3. Importamos las nuevas rutas de usuario
-
+import cookieParser from 'cookie-parser';
 
 
 const app = express();
@@ -34,6 +34,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions)); // Usa las opciones avanzadas
+
+app.use(cookieParser());
 
 app.use((req, res, next) => {
     console.log(`Petición recibida: ${req.method} ${req.url}`);

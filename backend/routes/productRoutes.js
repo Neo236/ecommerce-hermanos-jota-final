@@ -2,6 +2,7 @@
 import express from 'express';
 const router = express.Router();
 import Product from '../models/Product.js'; // 1. ¡Importamos el modelo!
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 // 2. Ya no necesitamos importar el JSON
 // const products = require('../data/products.json');
@@ -35,7 +36,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // 3. POST /api/productos (Crear UNO)
-router.post('/', async (req, res) => {
+router.post('/', protect, admin, async (req, res) => {
 
     try {
         // --- INICIO DE LA SOLUCIÓN DE LÍMITE ---
@@ -68,7 +69,7 @@ router.post('/', async (req, res) => {
 });
 
 // 4. PUT /api/productos/:id (Actualizar UNO)
-router.put('/:id', async (req, res) => {
+router.put('/:id', protect, admin, async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id, // El ID del producto a actualizar
@@ -87,7 +88,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // 5. DELETE /api/productos/:id (Borrar UNO)
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', protect, admin, async (req, res) => {
     try {
         const deletedProduct = await Product.findByIdAndDelete(req.params.id);
 
