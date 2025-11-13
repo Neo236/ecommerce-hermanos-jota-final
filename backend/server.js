@@ -1,18 +1,23 @@
 
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose'); // Importado
-require('dotenv').config(); // Importado y configurado
+// 1. Cambiamos 'require' por 'import'
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js'; // 2. Importamos las nuevas rutas de usuario
 
-const productRoutes = require('./routes/productRoutes');
+// 3. Configuramos dotenv
+dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 3001;
-const MONGO_URL = process.env.MONGO_URL; // <-- Usando tu variable MONGO_URL
+const MONGO_URL = process.env.MONGO_URL;
 
 // --- MIDDLEWARES ---
 const whitelist = [
-    'http://localhost:5173', // Tu frontend de desarrollo
-    'https://ecommerce-hermanos-jota-mern.vercel.app' // Tu frontend de Vercel
+    'http://localhost:5173', // frontend de desarrollo
+    'https://ecommerce-hermanos-jota-mern.vercel.app' // frontend de Vercel
 ];
 
 const corsOptions = {
@@ -36,6 +41,7 @@ app.use(express.json());
 
 // --- RUTAS ---
 app.use('/api/productos', productRoutes);
+app.use('/api/users', userRoutes);
 
 // --- MANEJO DE ERRORES ---
 app.use((req, res, next) => {
