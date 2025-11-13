@@ -5,14 +5,17 @@ import { Routes, Route } from 'react-router-dom'; // 1. Importar Routes y Route
 // Importamos Componentes de UI
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import ContactForm from './components/ContactForm'; // 2. ContactForm ahora es una "página"
 
 // Importamos Páginas
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CreateProductPage from './pages/CreateProductPage';
+import ContactForm from './components/ContactForm'; // 2. ContactForm ahora es una "página"
 import NotFoundPage from './pages/NotFoundPage'; // Una página para 404
+import RegisterPage from './pages/RegisterPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+
 
 function App() {
   // 4. El estado del carrito se queda aquí
@@ -49,6 +52,10 @@ function App() {
 
           {/* Ruta para el formulario de creación*/}
           <Route path="/admin/crear-producto" element={<CreateProductPage />} />
+          
+          <Route path="/registro" element={<RegisterPage />} />
+          
+          <Route path="/login" element={<LoginPage />} />
 
           {/* Ruta para la página de inicio*/}
           <Route path="/" element={<HomePage />} /> 
