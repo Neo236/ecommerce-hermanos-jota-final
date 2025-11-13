@@ -37,15 +37,17 @@ const corsOptions = {
     credentials: true
 };
 
+app.options('*', cors(corsOptions));
+
 app.use(cors(corsOptions)); // Usa las opciones avanzadas
 
 app.use(cookieParser());
+app.use(express.json());
 
 app.use((req, res, next) => {
     console.log(`Petición recibida: ${req.method} ${req.url}`);
     next();
 });
-app.use(express.json());
 
 // --- RUTAS ---
 app.use('/api/productos', productRoutes);
