@@ -1,7 +1,7 @@
 
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const Product = require('../models/Product'); // 1. ¡Importamos el modelo!
+import Product from '../models/Product.js'; // 1. ¡Importamos el modelo!
 
 // 2. Ya no necesitamos importar el JSON
 // const products = require('../data/products.json');
@@ -101,4 +101,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
