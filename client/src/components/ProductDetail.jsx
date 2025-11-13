@@ -1,7 +1,10 @@
 
+import { useCart } from '../context/CartContext.jsx';
+
 // 1. Recibe 'onDelete' y ya NO recibe 'onBack'
-function ProductDetail({ product, onAddToCart, onDelete }) {
+function ProductDetail({ product, onDelete }) {
   
+  const { addToCart } = useCart();
   const imageUrl = product.image.startsWith('http') ? product.image : `/${product.image}`;
 
   return (
@@ -32,7 +35,7 @@ function ProductDetail({ product, onAddToCart, onDelete }) {
             </ul>
           </div>
 
-          <button className="add-to-cart-btn" onClick={() => onAddToCart(product)}>
+          <button className="add-to-cart-btn" onClick={() => addToCart(product)}>
             Añadir al Carrito
           </button>
           

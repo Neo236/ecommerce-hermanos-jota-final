@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom'; // 1. Importar Routes y Route
 
 // Importamos Componentes de UI
@@ -15,24 +15,16 @@ import ContactForm from './components/ContactForm'; // 2. ContactForm ahora es u
 import NotFoundPage from './pages/NotFoundPage'; // Una página para 404
 import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import CartPage from './pages/CartPage.jsx';
 
 
 function App() {
-  // 4. El estado del carrito se queda aquí
-  const [cart, setCart] = useState([]);
-
-  // 5. Los estados de products, selectedProduct, loading, y error desaparecen
-  //    Cada página manejará su propia carga de datos.
-
-  const handleAddToCart = (productToAdd) => {
-    setCart([...cart, productToAdd]);
-    alert(`${productToAdd.name} fue añadido al carrito.`);
-  };
 
   return (
     <>
       {/* Navbar se muestra en TODAS las páginas */}
-      <Navbar cartItemCount={cart.length} />
+      <Navbar />
 
       <main>
         {/* 6. Aquí definimos nuestras rutas */}
@@ -42,16 +34,10 @@ function App() {
           <Route path="/productos" element={<CatalogPage />} />
           
           {/* Ruta para el detalle de producto. :id es un parámetro dinámico */}
-          <Route 
-            path="/productos/:id" 
-            element={<ProductDetailPage onAddToCart={handleAddToCart} />} 
-          />
+          <Route path="/productos/:id" element={<ProductDetailPage />} />
           
           {/* Ruta para el formulario de contacto */}
           <Route path="/contacto" element={<ContactForm />} />
-
-          {/* Ruta para el formulario de creación*/}
-          <Route path="/admin/crear-producto" element={<CreateProductPage />} />
           
           <Route path="/registro" element={<RegisterPage />} />
           
@@ -59,9 +45,19 @@ function App() {
 
           {/* Ruta para la página de inicio*/}
           <Route path="/" element={<HomePage />} /> 
+
+          <Route path="/cart" element={<CartPage />} />
           
           {/* Ruta para cualquier URL no encontrada (404) */}
           <Route path="*" element={<NotFoundPage />} /> 
+
+          {/* --- INICIO DE RUTA PROTEGIDA --- */}
+          <Route path="" element={<ProtectedRoute />}>
+              {/* Todas las rutas que pongamos aquí dentro requerirán login */}
+              <Route path="/admin/crear-producto" element={<CreateProductPage />} />
+              {/* Si tuviéramos más rutas de admin, irían aquí (ej: /admin/editar-producto/:id) */}
+          </Route>
+          {/* --- FIN DE RUTA PROTEGIDA --- */}
 
         </Routes>
       </main>

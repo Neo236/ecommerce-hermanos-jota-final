@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ProductDetail from '../components/ProductDetail'; // Importa el componente de UI
 import Loader from '../components/Loader'
 
-function ProductDetailPage({ onAddToCart }) {
+function ProductDetailPage() {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -55,7 +55,6 @@ function ProductDetailPage({ onAddToCart }) {
     return (
         <ProductDetail 
             product={product} 
-            onAddToCart={onAddToCart}
             onDelete={handleDelete} // Pasamos la nueva función de borrado
         />
     );

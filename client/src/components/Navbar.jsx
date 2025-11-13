@@ -3,13 +3,17 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // 1. Importar useNavigate
 import { useAuth } from '../context/AuthContext'; // 2. Importar el hook de autenticación
+import { useCart } from '../context/CartContext.jsx';
 
-function Navbar({ cartItemCount }) {
+function Navbar() {
   const [isNavActive, setIsNavActive] = useState(false);
   
   // 3. Obtener el estado y las funciones del contexto
   const { isAuthenticated, userInfo, logout } = useAuth();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
+
+  const totalItemsInCart = cartItems.reduce((acc, item) => acc + item.qty, 0);
 
   const handleLinkClick = () => {
     setIsNavActive(false);
@@ -70,10 +74,10 @@ function Navbar({ cartItemCount }) {
         </nav>
         
         <div className="header-cart">
-          <a href="#">
+          <Link to="/cart" onClick={handleLinkClick}> 
             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none"><path stroke="currentColor" strokeWidth="2" d="M12.5 21a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1ZM5.5 21a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1ZM3 3h2.25l2.452 12.26a1 1 0 0 0 .976.74h9.844a1 1 0 0 0 .976-.74L21 6H5.25"></path></svg>
-            <span className="cart-counter" id="cart-counter">{cartItemCount}</span>
-          </a>
+            <span className="cart-counter" id="cart-counter">{totalItemsInCart}</span>
+          </Link>
         </div>
       </div>
     </header>

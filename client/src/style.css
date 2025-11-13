@@ -621,3 +621,82 @@ body {
         color: var(--siena-tostado);
     }
 }
+
+/* ======================================= */
+/* PÁGINA DE CARRITO                      */
+/* ======================================= */
+.cart-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-info a {
+    font-weight: bold;
+    color: var(--dark-wood);
+    text-decoration: none;
+}
+.cart-item-info a:hover {
+    text-decoration: underline;
+}
+
+.btn-remove {
+    background: none;
+    border: 1px solid #ccc;
+    color: #888;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.btn-remove:hover {
+    background-color: var(--rosa-polvoriento);
+    color: white;
+    border-color: var(--rosa-polvoriento);
+}
+
+.cart-summary {
+    background: var(--light-grey);
+    padding: 2rem;
+    border-radius: 8px;
+    height: fit-content; /* Para que no se estire */
+}
+
+.cart-summary h3 {
+    font-family: var(--font-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.cart-summary h2 {
+    font-size: 1.8rem;
+    color: var(--siena-tostado);
+    margin-bottom: 1.5rem;
+}
+
+/* En escritorio, ponemos el resumen al lado */
+@media (min-width: 768px) {
+    .cart-layout {
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+    }
+}

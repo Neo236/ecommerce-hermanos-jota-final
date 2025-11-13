@@ -7,9 +7,12 @@ dotenv.config();// 2. Configuramos dotenv
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+
+// importamos rutas
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js'; // 3. Importamos las nuevas rutas de usuario
-import cookieParser from 'cookie-parser';
+import orderRoutes from './routes/orderRoutes.js';
 
 
 const app = express();
@@ -46,6 +49,7 @@ app.use(express.json());
 // --- RUTAS ---
 app.use('/api/productos', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 // --- MANEJO DE ERRORES ---
 app.use((req, res, next) => {
